@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wheel_collections",
+  "info": {
+    "singularName": "wheel-collection",
+    "pluralName": "wheel-collections",
+    "displayName": "Wheel Collection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "blocks"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "wheels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wheel.wheel",
+      "inversedBy": "wheel_collection"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
+    }
+  }
+}
