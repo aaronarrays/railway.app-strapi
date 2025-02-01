@@ -38,6 +38,80 @@
     "slug": {
       "type": "uid",
       "targetField": "Name"
+    },
+    "sizes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::size.size",
+      "mappedBy": "wheels"
+    },
+    "holes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hole.hole",
+      "mappedBy": "wheels"
+    },
+    "Gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "NEW": {
+      "type": "boolean"
+    },
+    "Custom": {
+      "type": "boolean"
+    },
+    "Options": {
+      "displayName": "Custom Wheels",
+      "type": "component",
+      "repeatable": true,
+      "component": "wheels.custom-wheels"
+    },
+    "lugcount": {
+      "type": "string"
+    },
+    "loadrating": {
+      "type": "string"
+    },
+    "finish": {
+      "type": "string"
+    },
+    "Offset": {
+      "type": "integer"
+    },
+    "bore": {
+      "type": "decimal"
+    },
+    "diameter": {
+      "type": "integer"
+    },
+    "width": {
+      "type": "integer"
+    },
+    "structure": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "decimal"
+    },
+    "bsm": {
+      "type": "decimal"
+    },
+    "bolt_circle_1": {
+      "type": "decimal"
+    },
+    "bolt_circle_2": {
+      "type": "decimal"
+    },
+    "lip_size": {
+      "type": "decimal"
     }
   }
 }

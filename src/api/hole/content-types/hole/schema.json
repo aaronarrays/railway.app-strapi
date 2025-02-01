@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "holes",
+  "info": {
+    "singularName": "hole",
+    "pluralName": "holes",
+    "displayName": "Holes"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "wheels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wheel.wheel",
+      "inversedBy": "holes"
+    }
+  }
+}

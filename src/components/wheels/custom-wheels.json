@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_wheels_custom_wheels",
+  "info": {
+    "displayName": "Custom Wheels",
+    "icon": "cog"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

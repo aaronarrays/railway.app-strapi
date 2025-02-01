@@ -495,6 +495,97 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface PluginSlugifySlug extends Struct.CollectionTypeSchema {
+  collectionName: 'slugs';
+  info: {
+    singularName: 'slug';
+    pluralName: 'slugs';
+    displayName: 'slug';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    slug: Schema.Attribute.Text;
+    count: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::slugify.slug'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHoleHole extends Struct.CollectionTypeSchema {
+  collectionName: 'holes';
+  info: {
+    singularName: 'hole';
+    pluralName: 'holes';
+    displayName: 'Holes';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    wheels: Schema.Attribute.Relation<'manyToMany', 'api::wheel.wheel'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::hole.hole'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSizeSize extends Struct.CollectionTypeSchema {
+  collectionName: 'sizes';
+  info: {
+    singularName: 'size';
+    pluralName: 'sizes';
+    displayName: 'Sizes';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Blocks;
+    wheels: Schema.Attribute.Relation<'manyToMany', 'api::wheel.wheel'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::size.size'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWheelWheel extends Struct.CollectionTypeSchema {
   collectionName: 'wheels';
   info: {
@@ -515,6 +606,28 @@ export interface ApiWheelWheel extends Struct.CollectionTypeSchema {
       'api::wheel-collection.wheel-collection'
     >;
     slug: Schema.Attribute.UID<'Name'>;
+    sizes: Schema.Attribute.Relation<'manyToMany', 'api::size.size'>;
+    holes: Schema.Attribute.Relation<'manyToMany', 'api::hole.hole'>;
+    Gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    NEW: Schema.Attribute.Boolean;
+    Custom: Schema.Attribute.Boolean;
+    Options: Schema.Attribute.Component<'wheels.custom-wheels', true>;
+    lugcount: Schema.Attribute.String;
+    loadrating: Schema.Attribute.String;
+    finish: Schema.Attribute.String;
+    Offset: Schema.Attribute.Integer;
+    bore: Schema.Attribute.Decimal;
+    diameter: Schema.Attribute.Integer;
+    width: Schema.Attribute.Integer;
+    structure: Schema.Attribute.String;
+    weight: Schema.Attribute.Decimal;
+    bsm: Schema.Attribute.Decimal;
+    bolt_circle_1: Schema.Attribute.Decimal;
+    bolt_circle_2: Schema.Attribute.Decimal;
+    lip_size: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -944,6 +1057,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::slugify.slug': PluginSlugifySlug;
+      'api::hole.hole': ApiHoleHole;
+      'api::size.size': ApiSizeSize;
       'api::wheel.wheel': ApiWheelWheel;
       'api::wheel-collection.wheel-collection': ApiWheelCollectionWheelCollection;
       'admin::permission': AdminPermission;
